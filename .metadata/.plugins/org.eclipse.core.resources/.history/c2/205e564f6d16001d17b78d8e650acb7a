@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ds.2airPollution";
+option java_outer_classname = "2airPollutionImpl";
+
+package 2airPollution;
+
+// Interface exported by the server.
+service 2airPollution {
+  
+  rpc 2airPollution_do(RequestMessage) returns (ResponseMessage) {}
+    
+}
+
+message RequestMessage {
+  string text = 1;  
+}
+
+message ResponseMessage {
+  int32 length = 1;
+}

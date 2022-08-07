@@ -1,0 +1,45 @@
+package ds.3stormWater;
+
+import java.io.IOException;
+
+import ds.3stormWater.3stormWaterGrpc.3stormWaterImplBase;
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
+import io.grpc.stub.StreamObserver;
+
+
+public class 3stormWater extends 3stormWaterImplBase{
+
+
+
+	public static void main(String[] args) throws InterruptedException, IOException {
+		3stormWater 1waterPollution = new 3stormWater();
+
+		int port = 50053;
+
+		Server server = ServerBuilder.forPort(port)
+				.addService(1waterPollution)
+				.build()
+				.start();
+
+		System.out.println("Service-3 started, listening on " + port);
+
+		server.awaitTermination();
+	}
+
+
+	@Override
+	public void 3stormWaterDo(RequestMessage request, StreamObserver<ResponseMessage> responseObserver) {
+
+		//prepare the value to be set back
+		int length = request.getText().length();
+		
+		//preparing the response message
+		ResponseMessage reply = ResponseMessage.newBuilder().setLength(length).build();
+
+		responseObserver.onNext( reply ); 
+
+		responseObserver.onCompleted();
+
+	}
+}

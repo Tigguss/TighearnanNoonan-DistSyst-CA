@@ -1,0 +1,220 @@
+package ds.client;
+
+import java.awt.Dimension;
+import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import ds.1waterPollution.1waterPollutionGrpc;
+import ds.2airPollution.2airPollutionGrpc;
+import ds.3stormWater.3stormWaterGrpc;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+
+
+public class ControllerGUI implements ActionListener{
+
+
+	private JTextField waterPollution, waterPollutionReply;
+	private JTextField airPollution, airPollutionReply;
+	private JTextField stormWater, stormWaterReply;
+
+
+
+	private JPanel get1waterPollutionJPanel() {
+
+		JPanel panel = new JPanel();
+
+		BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
+
+		JLabel label = new JLabel("Enter value")	;
+		panel.add(label);
+		panel.add(Box.createRigidArea(new Dimension(10, 0)));
+		waterPollution = new JTextField("",10);
+		panel.add(waterPollution));
+		panel.add(Box.createRigidArea(new Dimension(10, 0)));
+
+		JButton button = new JButton("Invoke Water Pollution Check");
+		button.addActionListener(this);
+		panel.add(button);
+		panel.add(Box.createRigidArea(new Dimension(10, 0)));
+
+		waterPollutionReply = new JTextField("", 10);
+		waterPollutionReply .setEditable(false);
+		panel.add(waterPollutionReply);
+
+		panel.setLayout(boxlayout);
+
+		return panel;
+
+	}
+
+	private JPanel get2airPollutionJPanel() {
+
+		JPanel panel = new JPanel();
+
+		BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
+
+		JLabel label = new JLabel("Enter value")	;
+		panel.add(label);
+		panel.add(Box.createRigidArea(new Dimension(10, 0)));
+		airPollution = new JTextField("",10);
+		panel.add(airPollution);
+		panel.add(Box.createRigidArea(new Dimension(10, 0)));
+
+		JButton button = new JButton("Invoke Air Pollution Service");
+		button.addActionListener(this);
+		panel.add(button);
+		panel.add(Box.createRigidArea(new Dimension(10, 0)));
+
+		airPollutionReply = new JTextField("", 10);
+		airPollutionReply .setEditable(false);
+		panel.add(airPollutionReply );
+
+		panel.setLayout(boxlayout);
+
+		return panel;
+
+	}
+
+	private JPanel get3stormWaterJPanel() {
+
+		JPanel panel = new JPanel();
+
+		BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
+
+		JLabel label = new JLabel("Enter value")	;
+		panel.add(label);
+		panel.add(Box.createRigidArea(new Dimension(10, 0)));
+		stormWater = new JTextField("",10);
+		panel.add(stormWater);
+		panel.add(Box.createRigidArea(new Dimension(10, 0)));
+
+		JButton button = new JButton("Invoke Storm Water Service");
+		button.addActionListener(this);
+		panel.add(button);
+		panel.add(Box.createRigidArea(new Dimension(10, 0)));
+
+		stormWaterReply = new JTextField("", 10);
+		stormWaterReply .setEditable(false);
+		panel.add(stormWaterReply );
+
+		panel.setLayout(boxlayout);
+
+		return panel;
+
+	}
+
+	
+	public static void main(String[] args) {
+
+		ControllerGUI gui = new ControllerGUI();
+
+		gui.build();
+	}
+
+	private void build() { 
+
+		JFrame frame = new JFrame("Service Controller Sample");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		// Set the panel to add buttons
+		JPanel panel = new JPanel();
+
+		// Set the BoxLayout to be X_AXIS: from left to right
+		BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
+
+		panel.setLayout(boxlayout);
+
+		// Set border for the panel
+		panel.setBorder(new EmptyBorder(new Insets(50, 100, 50, 100)));
+	
+		panel.add( getWaterPollutionJPanel() );
+		panel.add( get2airPollutionJPanel() );
+		panel.add( get3stormWaterJPanel() );
+
+		// Set size for the frame
+		frame.setSize(300, 300);
+
+		// Set the window to be visible as the default to be false
+		frame.add(panel);
+		frame.pack();
+		frame.setVisible(true);
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		JButton button = (JButton)e.getSource();
+		String label = button.getActionCommand();  
+
+		if (label.equals("Invoke Water Pollution Service ")) {
+			System.out.println("Water Pollution Service to be invoked ...");
+
+		
+			/*
+			 * 
+			 */
+			ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50051).usePlaintext().build();
+			1waterPollutionGrpc.1waterPollutionBlockingStub blockingStub = 1waterPollutionGrpc.newBlockingStub(channel);
+
+			//preparing message to send
+			ds.1waterPollution.RequestMessage request = ds.1waterPollution.RequestMessage.newBuilder().setText(waterPollution.getText()).build();
+
+			//retreving reply from service
+			ds.1waterPollution.ResponseMessage response = blockingStub.1waterPollutionDo(request);
+
+			waterPollutionReply.setText( String.valueOf( response.getLength()) );
+		
+		}else if (label.equals("Invoke Air Pollution Service")) {
+			System.out.println("Air Pollution Service to be invoked ...");
+
+		
+			/*
+			 * 
+			 */
+			ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50052).usePlaintext().build();
+			2airPollutionGrpc.2airPollutionBlockingStub blockingStub = 2airPollutionGrpc.newBlockingStub(channel);
+
+			//preparing message to send
+			ds.2airPollution.RequestMessage request = ds.2airPollution.RequestMessage.newBuilder().setText(airPollution.getText()).build();
+
+			//retreving reply from service
+			ds.2airPollution.ResponseMessage response = blockingStub.2airPollutionDo(request);
+
+			airPollutionReply.setText( String.valueOf( response.getLength()) );
+			
+		}else if (label.equals("Invoke Storm Water Service")) {
+			System.out.println("Storm Water Service to be invoked ...");
+
+		
+			/*
+			 * 
+			 */
+			ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 50053).usePlaintext().build();
+			3stormWaterGrpc.3stormWaterBlockingStub blockingStub = 3stormWaterGrpc.newBlockingStub(channel);
+
+			//preparing message to send
+			ds.3stormWater.RequestMessage request = ds.3stormWater.RequestMessage.newBuilder().setText(stormWater.getText()).build();
+
+			//retreving reply from service
+			ds.3stormWater.ResponseMessage response = blockingStub.3stormWaterDo(request);
+
+			stormWaterReply.setText( String.valueOf( response.getLength()) );
+		
+		}else{
+			
+		}
+
+	}
+
+}

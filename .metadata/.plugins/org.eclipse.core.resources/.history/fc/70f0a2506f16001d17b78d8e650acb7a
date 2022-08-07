@@ -1,0 +1,45 @@
+package ds.2airPollution;
+
+import java.io.IOException;
+
+import ds.2airPollution.2airPollutionGrpc.2airPollutionImplBase;
+import io.grpc.Server;
+import io.grpc.ServerBuilder;
+import io.grpc.stub.StreamObserver;
+
+
+public class 2airPollution extends 2airPollutionImplBase{
+
+
+
+	public static void main(String[] args) throws InterruptedException, IOException {
+		2airPollution 1waterPollution = new 2airPollution();
+
+		int port = 50052;
+
+		Server server = ServerBuilder.forPort(port)
+				.addService(1waterPollution)
+				.build()
+				.start();
+
+		System.out.println("Service-2 started, listening on " + port);
+
+		server.awaitTermination();
+	}
+
+
+	@Override
+	public void 2airPollutionDo(RequestMessage request, StreamObserver<ResponseMessage> responseObserver) {
+
+		//prepare the value to be set back
+		int length = request.getText().length();
+		
+		//preparing the response message
+		ResponseMessage reply = ResponseMessage.newBuilder().setLength(length).build();
+
+		responseObserver.onNext( reply ); 
+
+		responseObserver.onCompleted();
+
+	}
+}

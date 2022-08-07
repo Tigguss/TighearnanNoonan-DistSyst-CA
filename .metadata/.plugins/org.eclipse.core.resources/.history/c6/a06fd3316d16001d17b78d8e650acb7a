@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "ds.3stormWater";
+option java_outer_classname = "3stormWaterImpl";
+
+package 3stormWater;
+
+// Interface exported by the server.
+service 3stormWater {
+  
+  rpc 3stormWater_do(RequestMessage) returns (ResponseMessage) {}
+    
+}
+
+message RequestMessage {
+  string text = 1;  
+}
+
+message ResponseMessage {
+  int32 length = 1;
+}

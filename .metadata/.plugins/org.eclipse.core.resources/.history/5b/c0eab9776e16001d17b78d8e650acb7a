@@ -1,0 +1,295 @@
+package ds.2airPollution;
+
+import static io.grpc.MethodDescriptor.generateFullMethodName;
+import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncServerStreamingCall;
+import static io.grpc.stub.ClientCalls.asyncUnaryCall;
+import static io.grpc.stub.ClientCalls.blockingServerStreamingCall;
+import static io.grpc.stub.ClientCalls.blockingUnaryCall;
+import static io.grpc.stub.ClientCalls.futureUnaryCall;
+import static io.grpc.stub.ServerCalls.asyncBidiStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncClientStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncServerStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncUnaryCall;
+import static io.grpc.stub.ServerCalls.asyncUnimplementedStreamingCall;
+import static io.grpc.stub.ServerCalls.asyncUnimplementedUnaryCall;
+
+/**
+ * <pre>
+ * Interface exported by the server.
+ * </pre>
+ */
+@javax.annotation.Generated(
+    value = "by gRPC proto compiler (version 1.15.0)",
+    comments = "Source: 2airPollution.proto")
+public final class 2airPollutionGrpc {
+
+  private 2airPollutionGrpc() {}
+
+  public static final String SERVICE_NAME = "2airPollution.2airPollution";
+
+  // Static method descriptors that strictly reflect the proto.
+  private static volatile io.grpc.MethodDescriptor<ds.2airPollution.RequestMessage,
+      ds.2airPollution.ResponseMessage> get2airPollutionDoMethod;
+
+  @io.grpc.stub.annotations.RpcMethod(
+      fullMethodName = SERVICE_NAME + '/' + "2airPollution_do",
+      requestType = ds.2airPollution.RequestMessage.class,
+      responseType = ds.2airPollution.ResponseMessage.class,
+      methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
+  public static io.grpc.MethodDescriptor<ds.2airPollution.RequestMessage,
+      ds.2airPollution.ResponseMessage> get2airPollutionDoMethod() {
+    io.grpc.MethodDescriptor<ds.2airPollution.RequestMessage, ds.2airPollution.ResponseMessage> get2airPollutionDoMethod;
+    if ((get2airPollutionDoMethod = 2airPollutionGrpc.get2airPollutionDoMethod) == null) {
+      synchronized (2airPollutionGrpc.class) {
+        if ((get2airPollutionDoMethod = 2airPollutionGrpc.get2airPollutionDoMethod) == null) {
+          2airPollutionGrpc.get2airPollutionDoMethod = get2airPollutionDoMethod = 
+              io.grpc.MethodDescriptor.<ds.2airPollution.RequestMessage, ds.2airPollution.ResponseMessage>newBuilder()
+              .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
+              .setFullMethodName(generateFullMethodName(
+                  "2airPollution.2airPollution", "2airPollution_do"))
+              .setSampledToLocalTracing(true)
+              .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ds.2airPollution.RequestMessage.getDefaultInstance()))
+              .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
+                  ds.2airPollution.ResponseMessage.getDefaultInstance()))
+                  .setSchemaDescriptor(new 2airPollutionMethodDescriptorSupplier("2airPollution_do"))
+                  .build();
+          }
+        }
+     }
+     return get2airPollutionDoMethod;
+  }
+
+  /**
+   * Creates a new async stub that supports all call types for the service
+   */
+  public static 2airPollutionStub newStub(io.grpc.Channel channel) {
+    return new 2airPollutionStub(channel);
+  }
+
+  /**
+   * Creates a new blocking-style stub that supports unary and streaming output calls on the service
+   */
+  public static 2airPollutionBlockingStub newBlockingStub(
+      io.grpc.Channel channel) {
+    return new 2airPollutionBlockingStub(channel);
+  }
+
+  /**
+   * Creates a new ListenableFuture-style stub that supports unary calls on the service
+   */
+  public static 2airPollutionFutureStub newFutureStub(
+      io.grpc.Channel channel) {
+    return new 2airPollutionFutureStub(channel);
+  }
+
+  /**
+   * <pre>
+   * Interface exported by the server.
+   * </pre>
+   */
+  public static abstract class 2airPollutionImplBase implements io.grpc.BindableService {
+
+    /**
+     */
+    public void 2airPollutionDo(ds.2airPollution.RequestMessage request,
+        io.grpc.stub.StreamObserver<ds.2airPollution.ResponseMessage> responseObserver) {
+      asyncUnimplementedUnaryCall(get2airPollutionDoMethod(), responseObserver);
+    }
+
+    @java.lang.Override public final io.grpc.ServerServiceDefinition bindService() {
+      return io.grpc.ServerServiceDefinition.builder(getServiceDescriptor())
+          .addMethod(
+            get2airPollutionDoMethod(),
+            asyncUnaryCall(
+              new MethodHandlers<
+                ds.2airPollution.RequestMessage,
+                ds.2airPollution.ResponseMessage>(
+                  this, METHODID_2airPollution_DO)))
+          .build();
+    }
+  }
+
+  /**
+   * <pre>
+   * Interface exported by the server.
+   * </pre>
+   */
+  public static final class 2airPollutionStub extends io.grpc.stub.AbstractStub<2airPollutionStub> {
+    private 2airPollutionStub(io.grpc.Channel channel) {
+      super(channel);
+    }
+
+    private 2airPollutionStub(io.grpc.Channel channel,
+        io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected 2airPollutionStub build(io.grpc.Channel channel,
+        io.grpc.CallOptions callOptions) {
+      return new 2airPollutionStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public void 2airPollutionDo(ds.2airPollution.RequestMessage request,
+        io.grpc.stub.StreamObserver<ds.2airPollution.ResponseMessage> responseObserver) {
+      asyncUnaryCall(
+          getChannel().newCall(get2airPollutionDoMethod(), getCallOptions()), request, responseObserver);
+    }
+  }
+
+  /**
+   * <pre>
+   * Interface exported by the server.
+   * </pre>
+   */
+  public static final class 2airPollutionBlockingStub extends io.grpc.stub.AbstractStub<2airPollutionBlockingStub> {
+    private 2airPollutionBlockingStub(io.grpc.Channel channel) {
+      super(channel);
+    }
+
+    private 2airPollutionBlockingStub(io.grpc.Channel channel,
+        io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected 2airPollutionBlockingStub build(io.grpc.Channel channel,
+        io.grpc.CallOptions callOptions) {
+      return new 2airPollutionBlockingStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public ds.2airPollution.ResponseMessage 2airPollutionDo(ds.2airPollution.RequestMessage request) {
+      return blockingUnaryCall(
+          getChannel(), get2airPollutionDoMethod(), getCallOptions(), request);
+    }
+  }
+
+  /**
+   * <pre>
+   * Interface exported by the server.
+   * </pre>
+   */
+  public static final class 2airPollutionFutureStub extends io.grpc.stub.AbstractStub<2airPollutionFutureStub> {
+    private 2airPollutionFutureStub(io.grpc.Channel channel) {
+      super(channel);
+    }
+
+    private 2airPollutionFutureStub(io.grpc.Channel channel,
+        io.grpc.CallOptions callOptions) {
+      super(channel, callOptions);
+    }
+
+    @java.lang.Override
+    protected 2airPollutionFutureStub build(io.grpc.Channel channel,
+        io.grpc.CallOptions callOptions) {
+      return new 2airPollutionFutureStub(channel, callOptions);
+    }
+
+    /**
+     */
+    public com.google.common.util.concurrent.ListenableFuture<ds.2airPollution.ResponseMessage> 2airPollutionDo(
+        ds.2airPollution.RequestMessage request) {
+      return futureUnaryCall(
+          getChannel().newCall(get2airPollutionDoMethod(), getCallOptions()), request);
+    }
+  }
+
+  private static final int METHODID_2airPollution_DO = 0;
+
+  private static final class MethodHandlers<Req, Resp> implements
+      io.grpc.stub.ServerCalls.UnaryMethod<Req, Resp>,
+      io.grpc.stub.ServerCalls.ServerStreamingMethod<Req, Resp>,
+      io.grpc.stub.ServerCalls.ClientStreamingMethod<Req, Resp>,
+      io.grpc.stub.ServerCalls.BidiStreamingMethod<Req, Resp> {
+    private final 2airPollutionImplBase serviceImpl;
+    private final int methodId;
+
+    MethodHandlers(2airPollutionImplBase serviceImpl, int methodId) {
+      this.serviceImpl = serviceImpl;
+      this.methodId = methodId;
+    }
+
+    @java.lang.Override
+    @java.lang.SuppressWarnings("unchecked")
+    public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
+      switch (methodId) {
+        case METHODID_2airPollution_DO:
+          serviceImpl.2airPollutionDo((ds.2airPollution.RequestMessage) request,
+              (io.grpc.stub.StreamObserver<ds.2airPollution.ResponseMessage>) responseObserver);
+          break;
+        default:
+          throw new AssertionError();
+      }
+    }
+
+    @java.lang.Override
+    @java.lang.SuppressWarnings("unchecked")
+    public io.grpc.stub.StreamObserver<Req> invoke(
+        io.grpc.stub.StreamObserver<Resp> responseObserver) {
+      switch (methodId) {
+        default:
+          throw new AssertionError();
+      }
+    }
+  }
+
+  private static abstract class 2airPollutionBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoFileDescriptorSupplier, io.grpc.protobuf.ProtoServiceDescriptorSupplier {
+    2airPollutionBaseDescriptorSupplier() {}
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
+      return ds.2airPollution.2airPollutionImpl.getDescriptor();
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.ServiceDescriptor getServiceDescriptor() {
+      return getFileDescriptor().findServiceByName("2airPollution");
+    }
+  }
+
+  private static final class 2airPollutionFileDescriptorSupplier
+      extends 2airPollutionBaseDescriptorSupplier {
+    2airPollutionFileDescriptorSupplier() {}
+  }
+
+  private static final class 2airPollutionMethodDescriptorSupplier
+      extends 2airPollutionBaseDescriptorSupplier
+      implements io.grpc.protobuf.ProtoMethodDescriptorSupplier {
+    private final String methodName;
+
+    2airPollutionMethodDescriptorSupplier(String methodName) {
+      this.methodName = methodName;
+    }
+
+    @java.lang.Override
+    public com.google.protobuf.Descriptors.MethodDescriptor getMethodDescriptor() {
+      return getServiceDescriptor().findMethodByName(methodName);
+    }
+  }
+
+  private static volatile io.grpc.ServiceDescriptor serviceDescriptor;
+
+  public static io.grpc.ServiceDescriptor getServiceDescriptor() {
+    io.grpc.ServiceDescriptor result = serviceDescriptor;
+    if (result == null) {
+      synchronized (2airPollutionGrpc.class) {
+        result = serviceDescriptor;
+        if (result == null) {
+          serviceDescriptor = result = io.grpc.ServiceDescriptor.newBuilder(SERVICE_NAME)
+              .setSchemaDescriptor(new 2airPollutionFileDescriptorSupplier())
+              .addMethod(get2airPollutionDoMethod())
+              .build();
+        }
+      }
+    }
+    return result;
+  }
+}
